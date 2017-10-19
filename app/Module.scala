@@ -10,7 +10,7 @@ class Module extends AbstractModule {
     bind(classOf[Clock]).toInstance(Clock.systemUTC())
     bind(classOf[ApplicationTimer]).asEagerSingleton()
     bind(classOf[Counter]).to(classOf[AtomicCounter])
-    ReporterBot.run()
+    val reporterBot = new ReporterBot("451570869:AAEyTxoJ2oXkYccs5GHld6_CUQtXxDMC2PI").run()
   }
 
 }

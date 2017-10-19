@@ -1,19 +1,14 @@
 package core
 
-import info.mukel.telegrambot4s.api.declarative.Commands
-import info.mukel.telegrambot4s.api.{Polling, TelegramBot}
+import info.mukel.telegrambot4s.api._
+import info.mukel.telegrambot4s.methods._
+import info.mukel.telegrambot4s.models._
 
-object ReporterBot extends TelegramBot with Polling with Commands {
+class ReporterBot(token: String) extends AbstractBot(token) with Polling {
 
-  override lazy val token = "451570869:AAEyTxoJ2oXkYccs5GHld6_CUQtXxDMC2PI"
-
-  /*@Inject
-  lazy val userService = DefaultUserService*/
-
-  onCommand('hi) {
-    implicit msg => reply("Hi, this is awesome Scala!")
+  override def receiveMessage(msg: Message): Unit = {
+    for (text <- msg.text)
+      request(SendMessage(msg.source, "response: " + text))
   }
-
-  ReporterBot.run()
 
 }
